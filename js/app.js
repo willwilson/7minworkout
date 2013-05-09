@@ -50,7 +50,7 @@ function reset_workout(){
   total_seconds = 0;
   current_second = 0;
   current_workout = 1
-  $('#workout_image').css({'top': '10%', 'left', '0'});
+  $('#workout_image').css({'top': '10%', 'left': '0'});
   $('#timer').text('0:00');
 }
 
