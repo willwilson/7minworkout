@@ -15,13 +15,13 @@ function each_second(){
   if (sec < 10){ sec = '0' + sec; }
   $('#timer').text(min + ':' + sec);
 
-  if (current_second === 5){
+  if (current_second === 30){
     // break
     $('#title').text('Quick break...');
     $('#popupBreak').popup('open');
     whistle2.play();
   }
-  if (current_second === 10){
+  if (current_second === 40){
     $('#popupBreak').popup('close');
     step_workout();
   }
@@ -50,7 +50,8 @@ function reset_workout(){
   total_seconds = 0;
   current_second = 0;
   current_workout = 1
-  $('#workout_image').css('top', '10%');
+  $('#workout_image').css({'top': '10%', 'left', '0'});
+  $('#timer').text('0:00');
 }
 
 
@@ -73,6 +74,11 @@ $(function(){
       // stop workout
       timer = null;
     }
+    return false;
+  });
+  $('#reset').on('tap', function(event){
+    event.preventDefault();
+    reset_workout();
     return false;
   });
 
