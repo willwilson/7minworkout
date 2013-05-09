@@ -49,7 +49,8 @@ function reset_workout(){
   timer = null;
   total_seconds = 0;
   current_second = 0;
-  current_workout = 1
+  current_workout = 1;
+  $('#title').text('1. ' + data[0]);
   $('#workout_image').css({'top': '10%', 'left': '0'});
   $('#timer').text('0:00');
 }
@@ -81,9 +82,14 @@ $(function(){
     reset_workout();
     return false;
   });
+  /*$('#info').on('tap', function(event){
+    event.preventDefault();
+    $('#popupInfo').popup('open');
+    return false;
+  });*/
 
   // prevent scrolling
-  document.ontouchstart = function(e){ 
+  document.ontouchmove = function(e){ 
     e.preventDefault(); 
   }
 

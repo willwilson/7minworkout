@@ -37,7 +37,10 @@ html, body, #page_1, #page_1 > div, #footer {
 }
 
 
-
+#popupBreak {
+  text-align: center;
+  padding: 10px;
+}
 
 #header {
   position: absolute;
