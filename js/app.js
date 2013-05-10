@@ -17,7 +17,7 @@ function each_second(){
 
   if (current_second === 30){
     // break
-    $('#title').text('Quick break...');
+    $('#title').text('Quick break! Up next... ' + data[current_workout]);
     $('#popupBreak').popup('open');
     whistle2.play();
   }
