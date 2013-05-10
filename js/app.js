@@ -16,22 +16,26 @@ function each_second(){
   $('#timer').text(min + ':' + sec);
 
   if (current_second === 30){
-    // break
-    $('#title').text('Quick break...');
-    $('#popupBreak').popup('open');
-    whistle2.play();
+    take_break();
   }
   if (current_second === 40){
-    $('#popupBreak').popup('close');
     step_workout();
   }
 }
 
-function step_workout(){
-  current_second = 0;
+function take_break(){
+  //$('#title').text('Quick break...');
   current_workout++;
+  $('#popupBreak').popup('open');
+  $('#popupBreak h4').text('BREAK!  Up next... ' + data[current_workout-1]);
   $('#workout_image').css('left', '-' + ((current_workout-1) * 100) + '%');
   $('#title').text(current_workout + '. ' + data[current_workout-1]);
+  whistle2.play();
+}
+
+function step_workout(){
+  $('#popupBreak').popup('close');
+  current_second = 0;
   if (current_workout === 12){
     // finished
     $('#title').text('You\'re done!  Great work!');
@@ -82,11 +86,6 @@ $(function(){
     reset_workout();
     return false;
   });
-  /*$('#info').on('tap', function(event){
-    event.preventDefault();
-    $('#popupInfo').popup('open');
-    return false;
-  });*/
 
   // prevent scrolling
   document.ontouchmove = function(e){ 
