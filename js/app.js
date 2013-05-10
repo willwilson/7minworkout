@@ -26,26 +26,25 @@ function each_second(){
 function take_break(){
   //$('#title').text('Quick break...');
   current_workout++;
-  $('#popupBreak').popup('open');
-  $('#popupBreak h4').text('BREAK!  Up next... ' + data[current_workout-1]);
-  $('#workout_image').css('left', '-' + ((current_workout-1) * 100) + '%');
-  $('#title').text(current_workout + '. ' + data[current_workout-1]);
-  whistle2.play();
+  if (current_workout === 13){
+    // finished
+    $('#title').text('You\'re done!  Great work!');
+    $('#start_stop').trigger('tap');
+    setTimeout(reset_workout, 5000);
+    finished.play();
+  } else {
+    $('#popupBreak').popup('open');
+    $('#popupBreak h4').text('BREAK!  Up next... ' + data[current_workout-1]);
+    $('#workout_image').css('left', '-' + ((current_workout-1) * 100) + '%');
+    $('#title').text(current_workout + '. ' + data[current_workout-1]);
+    whistle2.play();
+  }
 }
 
 function step_workout(){
   $('#popupBreak').popup('close');
   current_second = 0;
-  if (current_workout === 12){
-    // finished
-    $('#title').text('You\'re done!  Great work!');
-    $('#start_stop').trigger('tap');
-    clearInterval(timer);
-    timer = null;
-    finished.play();
-  } else {
-    whistle.play();
-  }
+  whistle.play();
 }
 
 function reset_workout(){
@@ -59,8 +58,6 @@ function reset_workout(){
   $('#timer').text('0:00');
 }
 
-
-
 $(function(){
   whistle = $('#whistle').get(0);
   whistle2 = $('#whistle2').get(0);
@@ -73,10 +70,9 @@ $(function(){
       timer = setInterval(each_second, 1000);
       $(this).find('.ui-btn-text').text('STOP');
     } else {
+      // stop workout
       $(this).find('.ui-btn-text').text('START');
       clearInterval(timer);
-      timer = null;
-      // stop workout
       timer = null;
     }
     return false;
